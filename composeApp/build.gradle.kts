@@ -30,12 +30,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
-            implementation("io.ktor:ktor-client-core:1.3.1")
-            implementation("io.ktor:ktor-client-android:1.3.1")
-            implementation("io.ktor:ktor-client-okhttp:1.3.1")
-            implementation("io.ktor:ktor-client-serialization-jvm:1.3.1")
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3")
-            implementation("com.squareup.okhttp3:okhttp:4.9.2")
+//            implementation(libs.ktor.client.okhttp)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -44,6 +39,11 @@ kotlin {
             implementation(compose.ui)
             @OptIn(ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
+            implementation(libs.ktor.client.core)
+            implementation(libs.kotlinx.coroutines.core)
+        }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
         }
     }
 }
