@@ -1,5 +1,4 @@
 import org.jetbrains.compose.ExperimentalComposeLibrary
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -28,10 +27,15 @@ kotlin {
     }
     
     sourceSets {
-        
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
+            implementation("io.ktor:ktor-client-core:1.3.1")
+            implementation("io.ktor:ktor-client-android:1.3.1")
+            implementation("io.ktor:ktor-client-okhttp:1.3.1")
+            implementation("io.ktor:ktor-client-serialization-jvm:1.3.1")
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3")
+            implementation("com.squareup.okhttp3:okhttp:4.9.2")
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -76,5 +80,8 @@ android {
     dependencies {
         debugImplementation(libs.compose.ui.tooling)
     }
+}
+dependencies {
+    implementation(libs.firebase.crashlytics.buildtools)
 }
 
