@@ -12,18 +12,8 @@
                 "ui": [
                     "compose"
                 ]
-            },
-            "desktop": {
-                "ui": [
-                    "compose"
-                ]
-            },
-            "web": {
-                "ui": [
-                    "compose"
-                ]
             }
         }
     },
-    "timestamp": "2024-02-05T11:08:52.740768814Z"
+    "timestamp": "2024-02-07T11:14:13.525288367Z"
 }

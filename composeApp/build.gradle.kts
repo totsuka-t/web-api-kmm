@@ -1,6 +1,5 @@
 import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -9,17 +8,6 @@ plugins {
 }
 
 kotlin {
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        moduleName = "composeApp"
-        browser {
-            commonWebpackConfig {
-                outputFileName = "composeApp.js"
-            }
-        }
-        binaries.executable()
-    }
-    
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -27,8 +15,6 @@ kotlin {
             }
         }
     }
-    
-    jvm("desktop")
     
     listOf(
         iosX64(),
@@ -42,18 +28,10 @@ kotlin {
     }
     
     sourceSets {
-        val desktopMain by getting
         
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
-
-            implementation("io.ktor:ktor-client-core:1.3.1")
-            implementation("io.ktor:ktor-client-android:1.3.1")
-            implementation("io.ktor:ktor-client-okhttp:1.3.1")
-            implementation("io.ktor:ktor-client-serialization-jvm:1.3.1")
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3")
-            implementation("com.squareup.okhttp3:okhttp:4.9.2")
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -62,9 +40,6 @@ kotlin {
             implementation(compose.ui)
             @OptIn(ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
-        }
-        desktopMain.dependencies {
-            implementation(compose.desktop.currentOs)
         }
     }
 }
@@ -103,18 +78,3 @@ android {
     }
 }
 
-compose.desktop {
-    application {
-        mainClass = "MainKt"
-
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "org.example.project"
-            packageVersion = "1.0.0"
-        }
-    }
-}
-
-compose.experimental {
-    web.application {}
-}
