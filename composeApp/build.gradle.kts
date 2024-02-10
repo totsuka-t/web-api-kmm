@@ -36,6 +36,7 @@ kotlin {
             implementation(compose.components.resources)
             implementation(libs.ktor.client.core)
             implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.compose.voyager)
         }
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
