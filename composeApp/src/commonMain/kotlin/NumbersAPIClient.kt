@@ -6,6 +6,7 @@ class NumbersAPIClient {
     private val httpClient = HttpClient()
 
     suspend fun fetchTrivia(id: Int): String {
+        println("fetch trivia: id = $id")
         val response = httpClient.get("http://numbersapi.com/$id/trivia")
         return response.body()
     }
