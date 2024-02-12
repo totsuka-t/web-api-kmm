@@ -34,6 +34,11 @@ class HomeScreen : Screen {
                         navigator.pop()
                     })
                 }
+                ListTitle("WeatherForecastAPI") {
+                    navigator.push(WeatherScreen {
+                        navigator.pop()
+                    })
+                }
             }
         }
     }
