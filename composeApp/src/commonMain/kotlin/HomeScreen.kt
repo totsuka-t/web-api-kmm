@@ -30,7 +30,7 @@ class HomeScreen : Screen {
         ) {
             Column {
                 ListTitle("NumbersAPI") {
-                    navigator.push(NumbersView {
+                    navigator.push(NumbersScreen {
                         navigator.pop()
                     })
                 }

@@ -23,7 +23,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import cafe.adriel.voyager.core.screen.Screen
 import kotlinx.coroutines.launch
 
-class NumbersView(private val onClick: () -> Unit) : Screen {
+class NumbersScreen(private val onClick: () -> Unit) : Screen {
 
     @Composable
     override fun Content() {
