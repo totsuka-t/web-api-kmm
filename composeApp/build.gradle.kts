@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
+    // https://github.com/Kotlin/kotlinx.serialization
+    kotlin("plugin.serialization") version "1.9.21"
 }
 
 kotlin {
@@ -37,6 +39,7 @@ kotlin {
             implementation(libs.ktor.client.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.compose.voyager)
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
         }
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
