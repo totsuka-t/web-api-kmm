@@ -27,6 +27,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import kotlinx.coroutines.launch
@@ -73,21 +74,24 @@ class WeatherScreen(private val onClick: () -> Unit) : Screen {
                                     Icon(
                                         Icons.Filled.WbSunny,
                                         contentDescription = null,
-                                        modifier = Modifier.align(Alignment.CenterVertically)
+                                        modifier = Modifier.align(Alignment.CenterVertically),
+                                        tint = Color(0xFFF57C00)
                                     )
                                 }
                                 in 31..70 -> {
                                     Icon(
                                         Icons.Filled.Cloud,
                                         contentDescription = null,
-                                        modifier = Modifier.align(Alignment.CenterVertically)
+                                        modifier = Modifier.align(Alignment.CenterVertically),
+                                        tint = Color(0xFF616161)
                                     )
                                 }
                                 in 71..100 -> {
                                     Icon(
                                         Icons.Filled.WaterDrop,
                                         contentDescription = null,
-                                        modifier = Modifier.align(Alignment.CenterVertically)
+                                        modifier = Modifier.align(Alignment.CenterVertically),
+                                        tint = Color(0xFF1976D2)
                                     )
                                 }
                             }
