@@ -1,11 +1,16 @@
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,27 +33,43 @@ class PokemonScreen(private val onClick: () -> Unit) : Screen {
     override fun Content() {
         var pokemon by remember { mutableStateOf<Pokemon?>(null) }
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            pokemon?.let {
-                val painterResource = asyncPainterResource(data = it.sprites.frontDefault) {
-                    coroutineContext = Job() + Dispatchers.IO
-                }
-                KamelImage(painterResource, contentDescription = null)
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text("PokeAPI") },
+                    navigationIcon = {
+                        IconButton(onClick = onClick) {
+                            Icon(
+                                imageVector = Icons.Default.ArrowBack,
+                                contentDescription = "back"
+                            )
+                        }
+                    },
+                )
             }
-
-            val scope = rememberCoroutineScope()
-            Button({
-                scope.launch {
-                    pokemon = PokeAPIClient().fetchPokemon(1)
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                pokemon?.let {
+                    val painterResource = asyncPainterResource(data = it.sprites.frontDefault) {
+                        coroutineContext = Job() + Dispatchers.IO
+                    }
+                    KamelImage(painterResource, contentDescription = null)
                 }
-            }) {
-                Text("tapped")
+
+                val scope = rememberCoroutineScope()
+                Button({
+                    scope.launch {
+                        pokemon = PokeAPIClient().fetchPokemon(1)
+                    }
+                }) {
+                    Text("tapped")
+                }
             }
         }
     }
