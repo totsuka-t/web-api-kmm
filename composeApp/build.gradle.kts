@@ -42,6 +42,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.compose.voyager)
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
+            implementation("media.kamel:kamel-image:0.9.2")
         }
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
