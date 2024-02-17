@@ -39,6 +39,11 @@ class HomeScreen : Screen {
                         navigator.pop()
                     })
                 }
+                ListTitle("PokeAPI") {
+                    navigator.push(PokemonScreen {
+                        navigator.pop()
+                    })
+                }
             }
         }
     }

@@ -16,7 +16,6 @@ class WeatherAPIClient {
         val forecastDays = "forecast_days=$forecastDays"
 
         val response = httpClient.get("$baseUrl?$latitude&$longitude&$hourly&$timezone&$forecastDays")
-        println(Json.decodeFromString<Weather>(response.body()))
 
         return Json.decodeFromString<Weather>(response.body())
     }
