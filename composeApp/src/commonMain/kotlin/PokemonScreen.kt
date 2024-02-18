@@ -1,6 +1,8 @@
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
@@ -19,6 +21,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
@@ -59,7 +62,11 @@ class PokemonScreen(private val onClick: () -> Unit) : Screen {
                     val painterResource = asyncPainterResource(data = it.sprites.frontDefault) {
                         coroutineContext = Job() + Dispatchers.IO
                     }
-                    KamelImage(painterResource, contentDescription = null)
+                    KamelImage(
+                        painterResource,
+                        contentDescription = null,
+                        modifier =  Modifier.size(200.dp)
+                    )
                 }
 
                 val scope = rememberCoroutineScope()
