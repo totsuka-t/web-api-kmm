@@ -28,13 +28,17 @@ import io.kamel.image.asyncPainterResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 
 class PokemonScreen(private val onClick: () -> Unit) : Screen {
 
     @Composable
     override fun Content() {
-        var pokemon by remember { mutableStateOf<Pokemon?>(null) }
+        var pokemon1 by remember { mutableStateOf<Pokemon?>(null) }
+        var pokemon2 by remember { mutableStateOf<Pokemon?>(null) }
+        var pokemon3 by remember { mutableStateOf<Pokemon?>(null) }
 
         Scaffold(
             topBar = {
@@ -58,7 +62,27 @@ class PokemonScreen(private val onClick: () -> Unit) : Screen {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                pokemon?.let {
+                pokemon1?.let {
+                    val painterResource = asyncPainterResource(data = it.sprites.frontDefault) {
+                        coroutineContext = Job() + Dispatchers.IO
+                    }
+                    KamelImage(
+                        painterResource,
+                        contentDescription = null,
+                        modifier =  Modifier.size(200.dp)
+                    )
+                }
+                pokemon2?.let {
+                    val painterResource = asyncPainterResource(data = it.sprites.frontDefault) {
+                        coroutineContext = Job() + Dispatchers.IO
+                    }
+                    KamelImage(
+                        painterResource,
+                        contentDescription = null,
+                        modifier =  Modifier.size(200.dp)
+                    )
+                }
+                pokemon3?.let {
                     val painterResource = asyncPainterResource(data = it.sprites.frontDefault) {
                         coroutineContext = Job() + Dispatchers.IO
                     }
@@ -72,7 +96,23 @@ class PokemonScreen(private val onClick: () -> Unit) : Screen {
                 val scope = rememberCoroutineScope()
                 Button({
                     scope.launch {
-                        pokemon = PokeAPIClient().fetchPokemon(1)
+                        val pokemons = listOf(
+                            async { PokeAPIClient().fetchPokemon(1) },
+                            async { PokeAPIClient().fetchPokemon(2) },
+                            async { PokeAPIClient().fetchPokemon(3) }
+                        ).awaitAll()
+
+                        pokemons.map {
+                            if (it.id == 1) {
+                                pokemon1 = it
+                            } else if (it.id == 2) {
+                                pokemon2 = it
+                            } else if (it.id == 3) {
+                                pokemon3 = it
+                            } else {
+                                println("unknown: id = ${it.id}")
+                            }
+                        }
                     }
                 }) {
                     Text("tapped")
