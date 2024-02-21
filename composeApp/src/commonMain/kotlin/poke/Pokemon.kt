@@ -1,3 +1,5 @@
+package poke
+
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

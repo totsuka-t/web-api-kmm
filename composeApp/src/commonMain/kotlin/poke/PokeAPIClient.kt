@@ -1,3 +1,5 @@
+package poke
+
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -7,6 +9,9 @@ class PokeAPIClient {
     private val httpClient = HttpClient()
     private val json = Json { ignoreUnknownKeys = true }
 
+    /**
+     * https://pokeapi.co/
+     */
     suspend fun fetchPokemon(id: Int): Pokemon {
         println("fetch pokemon: id = $id")
         val response = httpClient.get("https://pokeapi.co/api/v2/pokemon/$id")

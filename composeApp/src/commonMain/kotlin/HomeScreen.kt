@@ -15,6 +15,9 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import numbers.NumbersScreen
+import poke.PokemonScreen
+import weatherForecast.WeatherScreen
 
 class HomeScreen : Screen {
     @Composable
